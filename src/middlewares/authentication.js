@@ -18,7 +18,7 @@ module.exports = async (req, res, next) => {
 
         if (tokenKey[0] == "Token") { // SIMPLE TOKEN
 
-            const tokenData = await Token.findOne({ token: tokenKey[1] }).populate("userId");
+            const tokenData = await Token.findOne({ token: tokenKey[1] }).populate("userId");//JWT de bunu yaptırmıyoruz db yorulmuyor
             req.user = tokenData ? tokenData.userId : false;
 
         } else if (tokenKey[0] == "Bearer") { // JWT

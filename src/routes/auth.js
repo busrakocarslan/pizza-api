@@ -12,9 +12,9 @@ const auth = require("../controllers/auth");
 
 // Login/logout:
 router.post("/login", auth.login); // Login and get Token or JWT
-// router.post("/refresh", auth.refresh); // JWT: Refresh
+router.post("/refresh", auth.refresh); //ONLY JWT: Refresh
 // router.all('/logout', auth.logout)
-router.get("/logout", auth.logout); // Token Logout
+router.get("/logout", auth.logout); //ONLY  Token Logout
 
 /* ------------------------------------------------------- */
 module.exports = router;

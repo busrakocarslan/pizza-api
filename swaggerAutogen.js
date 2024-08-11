@@ -23,7 +23,7 @@ const document = {
 	schemes: ['http', 'https'],
 	consumes: ["application/json"],
 	produces: ["application/json"],
-	securityDefinitions: {
+	securityDefinitions: {// sistemde kullanacağım güvenlik
 		Token: {
 			type: 'apiKey',
 			in: 'header',

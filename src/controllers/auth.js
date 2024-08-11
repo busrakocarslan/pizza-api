@@ -13,7 +13,7 @@ const User = require("../models/user");
 // benzersiz bnit token için helper dosyasındaki func da gerekiyor. 
 const passwordEncrypt = require("../helpers/passwordEncrypt");
 
-// const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
 module.exports = {
 
@@ -67,7 +67,7 @@ module.exports = {
         }
         // Convert to JWT:
         // jwt.sign(payload, key, { expiresIn: '30m' })
-        const accessToken = jwt.sign(accessData, process.env.ACCESS_KEY, { expiresIn: '30m' })
+        const accessToken = jwt.sign(accessData, process.env.ACCESS_KEY, { expiresIn: '30m' })// jwt oluşturma methodu. 
 
         // REFRESH TOKEN
         const refreshData = {
@@ -81,7 +81,7 @@ module.exports = {
         res.send({
             error: false,
             token: tokenData.token,
-            bearer: {
+            bearer: {// JWT ALANI
                 access: accessToken,
                 refresh: refreshToken
             },
@@ -91,8 +91,8 @@ module.exports = {
 
 
     
-    // refresh: async (req, res) => {
-    //     /*
+    refresh: async (req, res) => {
+    //     
     //         #swagger.tags = ["Authentication"]
     //         #swagger.summary = "Refresh"
     //         #swagger.description = 'Refresh with refreshToken for get accessToken'
@@ -105,48 +105,48 @@ module.exports = {
     //                 }
     //             }
     //         }
-    //     */
+    //     
 
-    //     const refreshToken = req.body?.bearer?.refresh
+        const refreshToken = req.body?.bearer?.refresh
 
-    //     if (refreshToken) {
+        if (refreshToken) {
 
-    //         const refreshData = await jwt.verify(refreshToken, process.env.REFRESH_KEY)
-    //         // console.log(refreshData)
+            const refreshData = await jwt.verify(refreshToken, process.env.REFRESH_KEY)
+            // console.log(refreshData)
 
-    //         if (refreshData) {
+            if (refreshData) {
 
-    //             const user = await User.findOne({ _id: refreshData._id })
+                const user = await User.findOne({ _id: refreshData._id })
                 
-    //             if (user && user.password == refreshData.password) {
+                if (user && user.password == refreshData.password) {
 
-    //                 if (user.isActive) {
+                    if (user.isActive) {
 
-    //                     res.status(200).send({
-    //                         error: false,
-    //                         bearer: {
-    //                             access: jwt.sign(user.toJSON(), process.env.ACCESS_KEY, { expiresIn: '30m' })
-    //                         }
-    //                     })
+                        res.status(200).send({
+                            error: false,
+                            bearer: {
+                                access: jwt.sign(user.toJSON(), process.env.ACCESS_KEY, { expiresIn: '30m' })
+                            }
+                        })
 
-    //                 } else {
-    //                     res.errorStatusCode = 401
-    //                     throw new Error("This account is not active.")
-    //                 }
-    //             } else {
-    //                 res.errorStatusCode = 401
-    //                 throw new Error('Wrong id or password.')
-    //             }
-    //         } else {
-    //             res.errorStatusCode = 401
-    //             throw new Error('JWT refresh data is wrong.')
-    //         }
-    //     } else {
-    //         res.errorStatusCode = 401
-    //         throw new Error('Please enter bearer.refresh')
-    //     }
+                    } else {
+                        res.errorStatusCode = 401
+                        throw new Error("This account is not active.")
+                    }
+                } else {
+                    res.errorStatusCode = 401
+                    throw new Error('Wrong id or password.')
+                }
+            } else {
+                res.errorStatusCode = 401
+                throw new Error('JWT refresh data is wrong.')
+            }
+        } else {
+            res.errorStatusCode = 401
+            throw new Error('Please enter bearer.refresh')
+        }
 
-    // },
+    },
 
     logout: async (req, res) => {
         /*
@@ -167,14 +167,13 @@ module.exports = {
                 result,
             });
 
-        } 
-        // else if (tokenKey[0] == "Bearer") {
+        }else if (tokenKey[0] == "Bearer") {
 
-        //     res.send({
-        //         error: false,
-        //         message: 'JWT: No need any process for logout.',
-        //     })
-        // }
+            res.send({
+                error: false,
+                message: 'JWT: No need any process for logout.',
+            })
+        }
     },
 };
 
