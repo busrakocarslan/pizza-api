@@ -56,7 +56,7 @@ module.exports = {
         }
       
 
-        /* JWT *
+        /* JWT */
         // ACCESS TOKEN
         const accessData = {
             _id: user._id,
@@ -81,10 +81,10 @@ module.exports = {
         res.send({
             error: false,
             token: tokenData.token,
-            // bearer: {
-            //     access: accessToken,
-            //     refresh: refreshToken
-            // },
+            bearer: {
+                access: accessToken,
+                refresh: refreshToken
+            },
             user,
         });
     },
