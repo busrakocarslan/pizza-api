@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
@@ -10,68 +10,162 @@
     $ mkdir logs
     $ nodemon
 */
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
 
 /* ------------------------------------------------------- */
 // Required Modules:
 
 // envVariables to process.env:
-require('dotenv').config()
-const PORT = process.env?.PORT || 8000
+require("dotenv").config();
+const PORT = process.env?.PORT || 8000;
 
 // asyncErrors to errorHandler:
-require('express-async-errors')
+require("express-async-errors");
 
 /* ------------------------------------------------------- */
 // Configrations:
 
 // Connect to DB:
-const { dbConnection } = require('./src/configs/dbConnection')
-dbConnection()
+const { dbConnection } = require("./src/configs/dbConnection");
+dbConnection();
 
 /* ------------------------------------------------------- */
 // Middlewares:
 
 // Accept JSON:
-app.use(express.json())
+app.use(express.json());
 
 // Logger:
-app.use(require('./src/middlewares/logger'))
+app.use(require("./src/middlewares/logger"));
 
-Auhentication:
-app.use(require('./src/middlewares/authentication'))
+Auhentication: app.use(require("./src/middlewares/authentication"));
 
 // findSearchSortPage / res.getModelList:
-app.use(require('./src/middlewares/queryHandler'))
+app.use(require("./src/middlewares/queryHandler"));
+
+/* ------------------------------------------------------- */
+//?E-MAİL
+//npm install nodemailer--NodeMailer.com
+// const nodemailer = require("nodemailer");
+//?fayk mail oluşturma
+//nodemailer.createTestAccount().then((data)=>console.log(data))// bana etherial.mail den fayk mail açıyor.bir kere oluşturdukta sonra yoruma aldım tekrar oluşturmasın diye
+/*{
+  user: 'tmvrab4lfgngjb34@ethereal.email',-->
+  pass: 'tFPNDmXaK3vb9hVvfM',
+  smtp: { host: 'smtp.ethereal.email', port: 587, secure: false },-->email alırken geçerli protokol
+  imap: { host: 'imap.ethereal.email', port: 993, secure: true },,-->email gönderirken geçerli protokol
+  pop3: { host: 'pop3.ethereal.email', port: 995, secure: true },,-->email gönderirken geçerli protokol
+  web: 'https://ethereal.email',
+  mxEnabled: false
+}*/
+// mail göndermeden sunucuya bağlanma
+
+
+
+//? Connect to MailServer/SMTP:
+// const transporter = nodemailer.createTransport({
+//   // sunucuya bağlı obj
+//   // SMTP: yani gönderme protokolü ayarları
+//   host: "smtp.ethereal.email", // hangi sunucu
+//   port: 587, //  sucunun hangi prtu
+//   secure: false, // güvenlik olsun mu olmasın mı
+//   auth: {
+//     // bağlanacağım kullanıcı adi va şifresi
+//     user: "tmvrab4lfgngjb34@ethereal.email",
+//     pass: "tFPNDmXaK3vb9hVvfM",
+//   },
+// });
+// // console.log(transporter)
+// //?SEND MAİL
+// //transporter.sendMail({},funtion(err,success))
+
+// transporter.sendMail(
+//   {
+//     from: "tmvrab4lfgngjb34@ethereal.email", // kullanıcı adınla aynı olmalı yoksa spam a düşüyor.
+//     to: "beraybusrakocarslan@gmail.com", // 'abc@def.com, def@ghi.com'
+//     subject: "Hello",
+//     text: "Hello There. How are you?",
+//     html: "<p> <b> Hello There </b> <br> How are you? </p>",
+//   },
+//   function (err, success) {
+//     success ? console.log('SUCCESS:', success) : console.log('ERROR: ', error)
+//   }
+// );
+//!GOOGLE İÇİN 
+// //* Google -> AccountHome -> Security -> Two-Step-Verify -> App-Passwords
+// const transporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//         user: 'beraybusrakocarslan@gmail.com',
+//         pass: 'jlrk sjya jlka xtmj'//!uygulama şifresi kısmından 
+//     }
+// })
+//sendMail:
+// transporter.sendMail(
+//   {
+//     from: "beraybusrakocarslan@gmail.com", // kullanıcı adınla aynı olmalı yoksa spam a düşüyor.
+//     to: "veyselkocarslan@gmail.com", // 'abc@def.com, def@ghi.com'
+//     subject: "Hello",
+//     text: "Bu meil sana olan aşkımın koda dökülmüş halidir.?",
+//     html: "<p> <h1> Canım yarim  </h1> <br> I love Code </p>",
+//   },
+//   function (err, success) {
+//     success ? console.log('SUCCESS:', success) : console.log('ERROR: ', error)
+//   }
+// );
+//!YandexMail (yandex)
+// const transporter = nodemailer.createTransport({
+//     service: 'yandex',
+//     auth: {
+//         user: 'test@yandex.com',
+//         pass: '11' // your email-password
+//     }
+// })
+
+// SendMail:
+// transporter.sendMail({
+
+//     from: 'qadir@clarusway.com',
+//     to: 'qadir@clarusway.com', // 'abc@def.com, def@ghi.com'
+//     subject: 'Hello',
+//     text: 'Hello There. How are you?',
+//     html: '<p> <b> Hello There </b> <br> How are you? </p>',
+
+// }, function (error, success) {
+
+//     success ? console.log('SUCCESS:', success) : console.log('ERROR: ', error)
+// })
+
+//! tüm emil kodları için helper/sendMail
 
 /* ------------------------------------------------------- */
 // Routes:
 
 // routes/index.js:
-app.use('/', require('./src/routes/'))// tüm routesleri topladığım dosyadan hepsnii çekiyorum!!!
+app.use("/", require("./src/routes/")); // tüm routesleri topladığım dosyadan hepsnii çekiyorum!!!
 
 // HomePath:
-app.all('/', (req, res) => {
-    res.send({
-        error: false,
-        message: 'Welcome to PIZZA API',
-        docs: {
-            swagger: "/documents/swagger",
-            redoc: "/documents/redoc",
-            json: "/documents/json",
-        },
-        user: req.user,
-    })
-})
+app.all("/", (req, res) => {
+  res.send({
+    error: false,
+    message: "Welcome to PIZZA API",
+    docs: {
+      swagger: "/documents/swagger",
+      redoc: "/documents/redoc",
+      json: "/documents/json",
+    },
+    user: req.user,
+  });
+});
 
 /* ------------------------------------------------------- */
 
 // errorHandler:
-app.use(require('./src/middlewares/errorHandler'))
+app.use(require("./src/middlewares/errorHandler"));
 
 // RUN SERVER:
-app.listen(PORT, () => console.log('http://127.0.0.1:' + PORT))
+app.listen(PORT, () => console.log("http://127.0.0.1:" + PORT));
 
 /* ------------------------------------------------------- */
 // Syncronization (must be in commentLine):

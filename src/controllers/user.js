@@ -4,6 +4,12 @@
 ------------------------------------------------------- */
 
 const User = require("../models/user");
+const sendMail = require('../helpers/sendMail')// create de mail atmak için 
+
+
+
+
+
 module.exports = {
   list: async (req, res) => {
     /*
@@ -62,6 +68,16 @@ module.exports = {
       //   throw customError;
     }
     const data = await User.create(req.body);
+    sendMail(
+      data.email,//to
+      'Welcome',//subject
+      `
+          <h1>Welcome</h1>
+          <h2>${data.username}</h2>
+          <p>Welcome to our system</p>
+      `//message
+  )
+
     res.status(201).send({
       error: false,
       data,

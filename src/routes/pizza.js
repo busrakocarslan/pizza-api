@@ -8,15 +8,27 @@ const router = require("express").Router();
 
 const pizza = require("../controllers/pizza");
 
+// dosya-image eklemek için
+const upload = require('../middlewares/upload')
+
 // URL: /pizzas
 
-router.route("/").get(pizza.list).post(pizza.create);
+router.route("/")
+.get(pizza.list)
+.post(upload.array("image"),pizza.create);
+
+//? FE kısmında formu nasıl düzenlemekla alakalı yorum
+/*
+    <form action="/pizzas" method="POST" enctype="mutipart/form-data">
+        <input type="file" name="image">
+    </form>
+*/ 
 
 router
   .route("/:id")
   .get(pizza.read)
-  .put(pizza.update)
-  .patch(pizza.update)
+  .put(upload.single('image'), pizza.update)
+  .patch(upload.single('image'), pizza.update)
   .delete(pizza.delete);
 
 /* ------------------------------------------------------- */
