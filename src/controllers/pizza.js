@@ -71,6 +71,16 @@ module.exports = {
             #swagger.tags = ["Pizzas"]
             #swagger.summary = "Update Pizza"
         */
+       //? multer dosyayı kaydettikten sonra req.file'in içinde file-files oluşturuyor. single gönderirisen file, array-any gönderirsen files.
+
+        /* FILE */
+        // console.log('file', req.file) // upload.single()
+        // console.log('files', req.files) // upload.array() || upload.any()
+        if (req.file) {
+          req.body.image = req.file.filename
+      }
+      /* FILE */
+
 
     const data = await Pizza.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,

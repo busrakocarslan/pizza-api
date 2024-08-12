@@ -17,7 +17,7 @@ module.exports = multer({
             // console.log('file', file)
             // returnCallback(error, fileName)
             // returnCallback(null, file.originalname)
-            returnCallback(null, Date.now() + '_' + file.originalname)
+            returnCallback(null, Date.now() + '_' + file.originalname)// hata göndermiyoruz ve dosya isminiş ayarlıyoruz. dosya ismi aybı olursa üst üste bastığı içinde date.now ile timestamp ekliyoruz.
         }
     })
 })
