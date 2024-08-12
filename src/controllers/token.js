@@ -8,19 +8,11 @@ const Token = require("../models/token");
 
 module.exports = {
   list: async (req, res) => {
-    /*
-            _swagger.tags = ["Tokens"]
-            _swagger.summary = "List Tokens"
-            _swagger.description = `
-                You can send query with endpoint for filter[], search[], sort[], page and limit.
-                <ul> Examples:
-                    <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>
-                    <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>
-                    <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>
-                    <li>URL/?<b>page=2&limit=1</b></li>
-                </ul>
-            `
+      /*
+            _swagger.deprecated = true
+            #swagger.ignore = true
         */
+
 
     const data = await res.getModelList(Token,{},"userId");//! ()içini böyle yapınca userıd için populete yapmış olduk! yani sadece id olarak gelmeyecek için dolu bilgilerle gelecek 
 
@@ -34,10 +26,11 @@ module.exports = {
   // CRUD:
 
   create: async (req, res) => {
-    /*
-            _swagger.tags = ["Tokens"]
-            _swagger.summary = "Create Token"
+      /*
+            _swagger.deprecated = true
+            #swagger.ignore = true
         */
+   
 
     const data = await Token.create(req.body);
 
@@ -48,12 +41,13 @@ module.exports = {
   },
 
   read: async (req, res) => {
-    /*
-            _swagger.tags = ["Tokens"]
-            _swagger.summary = "Get Single Token"
+      /*
+            _swagger.deprecated = true
+            #swagger.ignore = true
         */
+   
 
-    const data = await Token.findOne({ _id: req.params.id });
+    const data = await Token.findOne({ _id: req.params.id }).populate('userId');
 
     res.status(200).send({
       error: false,
@@ -62,10 +56,11 @@ module.exports = {
   },
 
   update: async (req, res) => {
-    /*
-            _swagger.tags = ["Tokens"]
-            _swagger.summary = "Update Token"
+      /*
+            _swagger.deprecated = true
+            #swagger.ignore = true
         */
+   
 
     const data = await Token.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
@@ -79,10 +74,11 @@ module.exports = {
   },
 
   delete: async (req, res) => {
-    /*
-            _swagger.tags = ["Tokens"]
-            _swagger.summary = "Delete Token"
+      /*
+            _swagger.deprecated = true
+            #swagger.ignore = true
         */
+    
 
     const data = await Token.deleteOne({ _id: req.params.id });
 

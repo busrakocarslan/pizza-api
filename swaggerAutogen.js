@@ -1,6 +1,6 @@
 "use strict"
 /* -------------------------------------------------------
-	EXPRESS - Personnel API
+	EXPRESS - PiZZA API
 ------------------------------------------------------- */
 require('dotenv').config()
 const HOST = process.env?.HOST || '127.0.0.1'
@@ -8,6 +8,7 @@ const PORT = process.env?.PORT || 8000
 /* ------------------------------------------------------- */
 const swaggerAutogen = require('swagger-autogen')()
 const packageJson = require('./package.json')
+//?ön temel ayarlar burada burası manual olarak girilecek kısım
 
 const document = {
 	info: {
@@ -21,8 +22,8 @@ const document = {
 	host: `${HOST}:${PORT}`,
 	basePath: '/',
 	schemes: ['http', 'https'],
-	consumes: ["application/json"],
-	produces: ["application/json"],
+	// consumes: ["application/json"],
+	// produces: ["application/json"],
 	securityDefinitions: {// sistemde kullanacağım güvenlik
 		Token: {
 			type: 'apiKey',
@@ -39,6 +40,10 @@ const document = {
 	},
 	security: [{ Token: [] }, { Bearer: [] }],
 	definitions: {
+		"Order":require("./src/models/order").schema.obj,
+		"Topping":require("./src/models/topping").schema.obj,
+		"Pizza":require("./src/models/pizza").schema.obj,
+		"User":require("./src/models/user").schema.obj
 		// Models:
 		// "User": require('./src/models/user').schema.obj,
 	}

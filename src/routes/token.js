@@ -10,7 +10,9 @@ const token = require("../controllers/token");
 
 // URL: /tokens
 
-router.route("/").get(token.list).post(token.create);
+router.route("/")
+.get(token.list)
+.post(token.create);
 
 router
   .route("/:id")
