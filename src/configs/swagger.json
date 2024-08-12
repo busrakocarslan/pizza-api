@@ -90,7 +90,7 @@
     "/auth/logout": {
       "get": {
         "tags": [
-          "Tokens"
+          "Authentication"
         ],
         "summary": "Create Token",
         "description": "",
@@ -214,11 +214,7 @@
     },
     "/tokens/": {
       "get": {
-        "tags": [
-          "Tokens"
-        ],
-        "summary": "List Tokens",
-        "description": "\r  You can send query with endpoint for filter[], search[], sort[], page and limit.\r  <ul> Examples:\r   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>\r   <li>URL/?<b>page=2&limit=1</b></li>\r  </ul>\r  ",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -226,10 +222,6 @@
         }
       },
       "post": {
-        "tags": [
-          "Tokens"
-        ],
-        "summary": "Create Token",
         "description": "",
         "responses": {
           "201": {
@@ -240,10 +232,6 @@
     },
     "/tokens/{id}": {
       "get": {
-        "tags": [
-          "Tokens"
-        ],
-        "summary": "Get Single Token",
         "description": "",
         "parameters": [
           {
@@ -260,10 +248,6 @@
         }
       },
       "put": {
-        "tags": [
-          "Tokens"
-        ],
-        "summary": "Update Token",
         "description": "",
         "parameters": [
           {
@@ -280,10 +264,6 @@
         }
       },
       "delete": {
-        "tags": [
-          "Tokens"
-        ],
-        "summary": "Delete Token",
         "description": "",
         "parameters": [
           {
@@ -303,10 +283,6 @@
         }
       },
       "patch": {
-        "tags": [
-          "Tokens"
-        ],
-        "summary": "Update Token",
         "description": "",
         "parameters": [
           {
@@ -521,6 +497,18 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -564,6 +552,18 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {

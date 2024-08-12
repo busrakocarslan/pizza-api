@@ -9,9 +9,9 @@ const Token = require("../models/token");
 module.exports = {
   list: async (req, res) => {
     /*
-            #swagger.tags = ["Tokens"]
-            #swagger.summary = "List Tokens"
-            #swagger.description = `
+            _swagger.tags = ["Tokens"]
+            _swagger.summary = "List Tokens"
+            _swagger.description = `
                 You can send query with endpoint for filter[], search[], sort[], page and limit.
                 <ul> Examples:
                     <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>
@@ -35,8 +35,8 @@ module.exports = {
 
   create: async (req, res) => {
     /*
-            #swagger.tags = ["Tokens"]
-            #swagger.summary = "Create Token"
+            _swagger.tags = ["Tokens"]
+            _swagger.summary = "Create Token"
         */
 
     const data = await Token.create(req.body);
@@ -49,8 +49,8 @@ module.exports = {
 
   read: async (req, res) => {
     /*
-            #swagger.tags = ["Tokens"]
-            #swagger.summary = "Get Single Token"
+            _swagger.tags = ["Tokens"]
+            _swagger.summary = "Get Single Token"
         */
 
     const data = await Token.findOne({ _id: req.params.id });
@@ -63,8 +63,8 @@ module.exports = {
 
   update: async (req, res) => {
     /*
-            #swagger.tags = ["Tokens"]
-            #swagger.summary = "Update Token"
+            _swagger.tags = ["Tokens"]
+            _swagger.summary = "Update Token"
         */
 
     const data = await Token.updateOne({ _id: req.params.id }, req.body, {
@@ -80,8 +80,8 @@ module.exports = {
 
   delete: async (req, res) => {
     /*
-            #swagger.tags = ["Tokens"]
-            #swagger.summary = "Delete Token"
+            _swagger.tags = ["Tokens"]
+            _swagger.summary = "Delete Token"
         */
 
     const data = await Token.deleteOne({ _id: req.params.id });
