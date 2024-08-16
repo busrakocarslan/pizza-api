@@ -37,7 +37,7 @@ dbConnection();
 app.use(express.json());
 
 // Logger:
-app.use(require("./src/middlewares/logger"));
+// app.use(require("./src/middlewares/logger"));
 
 Auhentication: app.use(require("./src/middlewares/authentication"));
 
@@ -162,7 +162,7 @@ app.all("/", (req, res) => {
 //? nodejs gelen her veriyi dimatik-router kabul edip bir controller a havale etmek ister;ancak static dosyaları bu şekilde belirtmemiz gerekir. 
 // StaticFile:
 // app.use('/uploads', express.static('./uploads'))
-app.use('/images', express.static('./uploads'))//1.parametre URL,2.parametre verinin alınacağı dısya adı.
+// app.use('/images', express.static('./uploads'))//1.parametre URL,2.parametre verinin alınacağı dısya adı.
 /* ------------------------------------------------------- */
 
 // errorHandler:
