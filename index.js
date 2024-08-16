@@ -151,9 +151,9 @@ app.all("/", (req, res) => {
     error: false,
     message: "Welcome to PIZZA API",
     docs: {
-      swagger: "/documents/swagger",
-      redoc: "/documents/redoc",
-      json: "/documents/json",
+      swagger: "api/v1/documents/swagger",
+      redoc: "api/v1/documents/redoc",
+      json: "api/v1/documents/json",
     },
     user: req.user,
   });
