@@ -7,6 +7,7 @@
 
 const morgan = require("morgan");
 const fs = require("node:fs");
+const path = "./logs";
 
 if (!fs.existsSync(path)){
     fs.mkdirSync(path);
