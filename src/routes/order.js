@@ -10,7 +10,9 @@ const order = require("../controllers/order");
 
 // URL: /orders
 
-router.route("/").get(order.list).post(order.create);
+router.route("/")
+.get(order.list)
+.post(order.create);
 
 router
   .route("/:id")
