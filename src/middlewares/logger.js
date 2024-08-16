@@ -8,11 +8,7 @@
 const morgan = require('morgan')
 const fs = require('node:fs')
 
-const path = "./logs";
 
-if (!fs.existsSync(path)){
-    fs.mkdirSync(path);
-}
 
 const now = new Date()
 const today = now.toISOString().split('T')[0]
