@@ -37,7 +37,7 @@ dbConnection();
 app.use(express.json());
 
 // Logger:
- app.use(require("./src/middlewares/logger"));
+//  app.use(require("./src/middlewares/logger"));
 
 Auhentication: app.use(require("./src/middlewares/authentication"));
 
