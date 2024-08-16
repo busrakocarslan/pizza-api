@@ -22,6 +22,7 @@ const PORT = process.env?.PORT || 8000;
 
 // asyncErrors to errorHandler:
 require("express-async-errors");
+const path = require("path")
 
 /* ------------------------------------------------------- */
 // Configrations:
@@ -35,6 +36,8 @@ dbConnection();
 
 // Accept JSON:
 app.use(express.json());
+
+app.use(express.static(path.resolve(__dirname, "./public")))
 
 // Logger:
 //  app.use(require("./src/middlewares/logger"));
@@ -144,18 +147,20 @@ app.use(require("./src/middlewares/queryHandler"));
 app.use("/", require("./src/routes/")); // tüm routesleri topladığım dosyadan hepsnii çekiyorum!!!
 
 // HomePath:
-app.all("/", (req, res) => {
-  res.send({
-    error: false,
-    message: "Welcome to PIZZA API",
-    docs: {
-      swagger: "documents/swagger",
-      redoc: "documents/redoc",
-      json: "documents/json",
-    },
+app.all("/api/v1", (req, res) => {
+  res.json({
+    message: "Welcome to Stock api!",
+    documents: [
+      "/api/v1/documents/json",
+      "/api/v1/documents/swagger",
+      "/api/v1/documents/redoc",
+    ],
     user: req.user,
   });
 });
+
+//main route index
+app.use("/api/v1", require("./src/routes/routerIndex"));
 
 //? nodejs gelen her veriyi dimatik-router kabul edip bir controller a havale etmek ister;ancak static dosyaları bu şekilde belirtmemiz gerekir.
 // StaticFile:
