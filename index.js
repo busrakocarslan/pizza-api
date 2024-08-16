@@ -61,8 +61,6 @@ app.use(require("./src/middlewares/queryHandler"));
 }*/
 // mail göndermeden sunucuya bağlanma
 
-
-
 //? Connect to MailServer/SMTP:
 // const transporter = nodemailer.createTransport({
 //   // sunucuya bağlı obj
@@ -92,13 +90,13 @@ app.use(require("./src/middlewares/queryHandler"));
 //     success ? console.log('SUCCESS:', success) : console.log('ERROR: ', error)
 //   }
 // );
-//!GOOGLE İÇİN 
+//!GOOGLE İÇİN
 // //* Google -> AccountHome -> Security -> Two-Step-Verify -> App-Passwords
 // const transporter = nodemailer.createTransport({
 //     service: 'gmail',
 //     auth: {
 //         user: 'beraybusrakocarslan@gmail.com',
-//         pass: 'jlrk sjya jlka xtmj'//!uygulama şifresi kısmından 
+//         pass: 'jlrk sjya jlka xtmj'//!uygulama şifresi kısmından
 //     }
 // })
 //sendMail:
@@ -151,18 +149,18 @@ app.all("/", (req, res) => {
     error: false,
     message: "Welcome to PIZZA API",
     docs: {
-      swagger: "api/v1/documents/swagger",
-      redoc: "api/v1/documents/redoc",
-      json: "api/v1/documents/json",
+      swagger: "documents/swagger",
+      redoc: "documents/redoc",
+      json: "documents/json",
     },
     user: req.user,
   });
 });
 
-//? nodejs gelen her veriyi dimatik-router kabul edip bir controller a havale etmek ister;ancak static dosyaları bu şekilde belirtmemiz gerekir. 
+//? nodejs gelen her veriyi dimatik-router kabul edip bir controller a havale etmek ister;ancak static dosyaları bu şekilde belirtmemiz gerekir.
 // StaticFile:
 // app.use('/uploads', express.static('./uploads'))
- app.use('/images', express.static('./uploads'))//1.parametre URL,2.parametre verinin alınacağı dısya adı.
+app.use("/images", express.static("./uploads")); //1.parametre URL,2.parametre verinin alınacağı dısya adı.
 /* ------------------------------------------------------- */
 
 // errorHandler:
